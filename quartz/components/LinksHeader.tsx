@@ -1,0 +1,28 @@
+import { QuartzComponentConstructor } from "./types"
+import style from "./styles/linksHeader.scss"
+
+interface Options {
+  links: Record<string, string>
+}
+
+export default (() => {
+  function LinksHeader() {
+    return (
+      <div>
+        <div id="links-header">
+          <span>
+            🏠 <a href="/">Home</a>
+          </span>
+          <span>
+            🌱
+            <a href="/research-pocket">Garden</a>
+          </span>
+        </div>
+        <hr style="background-color: var(--gray); margin-top: 1.3rem"></hr>
+      </div>
+    )
+  }
+
+  LinksHeader.css = style
+  return LinksHeader
+}) satisfies QuartzComponentConstructor
