@@ -19,6 +19,8 @@ import DesktopOnly from "./DesktopOnly"
 import MobileOnly from "./MobileOnly"
 import RecentNotes from "./RecentNotes"
 import Breadcrumbs from "./Breadcrumbs"
+import LinksHeader from "./LinksHeader"
+import ResearchPocketGraph from "./ResearchPocketGraph"
 import Comments from "./Comments"
 
 export {
@@ -26,6 +28,7 @@ export {
   Content,
   TagContent,
   FolderContent,
+  LinksHeader,
   Darkmode,
   Head,
   PageTitle,
