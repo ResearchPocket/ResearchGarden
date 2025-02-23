@@ -46,5 +46,6 @@ export {
   RecentNotes,
   NotFound,
   Breadcrumbs,
+  ResearchPocketGraph,
   Comments,
 }

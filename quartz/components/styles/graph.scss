@@ -71,3 +71,38 @@
     }
   }
 }
+
+.research-pocket-container {
+  width: 100%;
+  height: 80vh;
+  margin: 1rem 0;
+  position: relative;
+  
+  .graph {
+    width: 100%;
+    height: 100%;
+    
+    .graph-outer {
+      width: 100%;
+      height: 100%;
+      background-color: var(--light);
+      border-radius: 5px;
+      border: 1px solid var(--lightgray);
+      overflow: hidden;
+      position: relative;
+      
+      #research-pocket-graph-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        canvas {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
