@@ -22,6 +22,7 @@ import Breadcrumbs from "./Breadcrumbs"
 import LinksHeader from "./LinksHeader"
 import ResearchPocketGraph from "./ResearchPocketGraph"
 import Comments from "./Comments"
+import ResearchPocketNotesList from './pages/ResearchPocketNotesList'
 
 export {
   ArticleTitle,
@@ -47,5 +48,6 @@ export {
   NotFound,
   Breadcrumbs,
   ResearchPocketGraph,
+  ResearchPocketNotesList,
   Comments,
 }
