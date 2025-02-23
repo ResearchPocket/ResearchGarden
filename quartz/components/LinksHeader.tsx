@@ -14,8 +14,7 @@ export default (() => {
             🏠 <a href="/">Home</a>
           </span>
           <span>
-            🌱
-            <a href="/research-pocket">Garden</a>
+            🌱 <a href="/garden">Garden</a>
           </span>
         </div>
         <hr style="background-color: var(--gray); margin-top: 1.3rem"></hr>

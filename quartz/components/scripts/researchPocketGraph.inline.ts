@@ -32,16 +32,25 @@ const renderResearchPocketGraph = async () => {
   try {
     const response = await fetch("/static/research-pocket-graph.json")
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      throw new Error(`HTTP error! status: ${ response.status }`)
     }
+
     const graphData = await response.json()
 
+    if (!graphData.nodes.length) {
+      container.innerHTML = "<div class='empty-state'>No research items found</div>"
+      return
+    }
+
+    // Clear any existing content
     container.innerHTML = ""
-    container.style.minHeight = "800px"
+
+    // Set minimum height
+    container.style.minHeight = "800px" // Increased minimum height
 
     const rect = container.getBoundingClientRect()
     const width = rect.width
-    const height = Math.max(rect.height, 800)
+    const height = Math.max(rect.height, 800) // Increased minimum height
 
     const computedStyle = getComputedStyle(document.documentElement)
     const colors = {
@@ -61,13 +70,11 @@ const renderResearchPocketGraph = async () => {
       backgroundAlpha: 0,
       resolution: window.devicePixelRatio,
       preference: "webgpu",
-      powerPreference: "high-performance",
-      clearBeforeRender: true,
     })
 
     container.appendChild(app.canvas)
 
-    const createText = (options: {text: string, fontSize: number, wordWrapWidth?: number}) => {
+    const createText = (options: { text: string, fontSize: number, wordWrapWidth?: number }) => {
       return new Text({
         text: options.text,
         style: {
@@ -252,13 +259,10 @@ const renderResearchPocketGraph = async () => {
 
     const resizeHandler = () => {
       const newRect = container.getBoundingClientRect()
-      const newWidth = newRect.width
       const newHeight = Math.max(newRect.height, 800)
-
-      app.renderer.resize(newWidth, newHeight)
-      simulation.force("center", forceCenter(newWidth / 2, newHeight / 2))
+      app.renderer.resize(newRect.width, newHeight)
+      simulation.force("center", forceCenter(newRect.width / 2, newHeight / 2))
       simulation.alpha(0.3).restart()
-      needsRender = true
     }
 
     window.addEventListener("resize", resizeHandler)
@@ -270,10 +274,33 @@ const renderResearchPocketGraph = async () => {
     window.addCleanup?.(() => cleanup())
   } catch (error) {
     console.error("Error loading research pocket graph:", error)
-    container.innerHTML = `<div class='error-state'>Error loading graph: ${error instanceof Error ? error.message : "Unknown error"}</div>`
+    container.innerHTML = `<div class='error-state'>Error loading graph: ${ error instanceof Error ? error.message : "Unknown error" }</div>`
   }
 }
 
 document.addEventListener("nav", () => {
   renderResearchPocketGraph()
 })
+
+const handleSave = (e: any) => {
+  e.preventDefault()
+  const currentUrl = encodeURIComponent(window.location.href)
+  const defaultProvider = "local"
+  const defaultDbPath = "/home/origami/Dev/projects/rust/pocket-research/research.sqlite"
+  
+  const tags = prompt("Enter tags (comma-separated):", "")
+  const provider = prompt("Enter provider:", defaultProvider) || defaultProvider
+  const dbPath = prompt("Enter database path:", defaultDbPath) || defaultDbPath
+
+  if (tags !== null && dbPath !== null && provider !== null) {
+    const encodedTags = encodeURIComponent(tags)
+    const encodedDbPath = encodeURIComponent(dbPath)
+    const encodedProvider = encodeURIComponent(provider)
+    
+    const researchUrl = `research://save?url=${currentUrl}&provider=${encodedProvider}&tags=${encodedTags}&db_path=${encodedDbPath}`
+    window.location.href = researchUrl
+  } else {
+    alert("Invalid input")
+  }
+}
+document.getElementById('save-item')?.addEventListener('submit', handleSave)

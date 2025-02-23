@@ -106,3 +106,38 @@
     }
   }
 }
+#save-item {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  align-items: center;
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    background: var(--light);
+    
+    &[type="url"] {
+      flex: 2;
+    }
+    
+    &[type="text"] {
+      flex: 1;
+    }
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    background: var(--dark);
+    color: var(--light);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
